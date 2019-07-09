@@ -1,4 +1,6 @@
 const findItemByBarcodes = require('../main');
+const createReceiptByItem = require('../main');
+
 
 let items = [
     {"id": "0001", "name" : "Coca Cola", "price": 3},
@@ -18,8 +20,24 @@ it ('should return true when call find item by barcodes given barcodes', () => {
     expect(findItemByBarcodes(barcodes,items)).toBe(true);
 });
 
+
 let barcodes2 = ['10001','0002']
 it ('should return false when call find item by barcodes given barcodes2', () => {
     expect(findItemByBarcodes(barcodes2,items)).toBe(false);
 });
 
+
+let barcodes3 = ['0001','0002']
+let receipt = {
+    item:[{id:'0001',name:"Coca Cola",price:3},{id:'0002',name:"Diet Coke",price:4}],
+    totalPrice:7
+}
+it ('should return receipt when call create receipt by item given barcodes3', () => {
+    expect(createReceiptByItem(barcodes3,items)).toStrictEqual(receipt);
+});
+
+
+let barcodes4 = ['0001','10002']
+it ('should return null when call create receipt by item given barcodes4', () => {
+    expect(createReceiptByItem(barcodes4,items)).toStrictEqual(null);
+});
