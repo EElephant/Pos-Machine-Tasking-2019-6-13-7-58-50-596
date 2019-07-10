@@ -32,8 +32,12 @@ let receipt = {
     item:[{id:'0001',name:"Coca Cola",price:3},{id:'0002',name:"Diet Coke",price:4}],
     totalPrice:7
 }
+let receiptString = 'Receipts\n---------------------------------------------------\nCoca Cola\t\t\t3\nDiet Coke\t\t\t4\n---------------------------------------------------\nPrice:7'
 it ('should return receipt when call create receipt by item given barcodes3', () => {
     expect(aaa.createReceiptByItem(barcodes3,items)).toStrictEqual(receipt);
+});
+it ('should return receiptString when call create receipt by item given barcodes3', () => {
+    expect(aaa.printReceipt(barcodes3,items)).toStrictEqual(receiptString);
 });
 
 

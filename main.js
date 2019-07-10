@@ -1,7 +1,7 @@
-function findItemByBarcodes (barcodes,items) {
+const findItemByBarcodes = (barcodes,items) => {
     let index = 0;
-    for(var i=0;i<items.length;i++){
-        for(var j=0;j<barcodes.length;j++){
+    for(let i=0;i<items.length;i++){
+        for(let j=0;j<barcodes.length;j++){
             if(barcodes[j] == items[i].id){
                 index ++;
             }
@@ -13,7 +13,7 @@ function findItemByBarcodes (barcodes,items) {
     return false;
 }
 
-function createReceiptByItem(barcodes,items){
+const createReceiptByItem = (barcodes,items) =>{
     let isExist = findItemByBarcodes(barcodes,items)
     let receipt = {
         item: [],
@@ -22,8 +22,8 @@ function createReceiptByItem(barcodes,items){
     if(isExist == false){
         return null
     }else{
-        for(var i=0;i<barcodes.length;i++){
-            for(var j=0;j<items.length;j++){
+        for(let i=0;i<barcodes.length;i++){
+            for(let j=0;j<items.length;j++){
                 if(barcodes[i] == items[j].id){
                     receipt.item.push(items[j])
                     receipt.totalPrice == undefined? (items[j].price) : receipt.totalPrice += items[j].price
@@ -34,5 +34,21 @@ function createReceiptByItem(barcodes,items){
     }
 }
 
+const printReceipt = (barcodes,items) =>{
+    let receipt = createReceiptByItem(barcodes,items)
+    let receiptString = 'Receipts\n'
+    receiptString += '---------------------------------------------------\n'
+    receipt.item.forEach(item =>{
+        receiptString += item.name
+        receiptString += '\t\t\t'
+        receiptString += item.price
+        receiptString += '\n' 
+    })
+    receiptString += '---------------------------------------------------\n'
+    receiptString += `Price:${receipt.totalPrice}`
+    return receiptString
+}
+
 module.exports = {findItemByBarcodes,
-createReceiptByItem}
+createReceiptByItem,
+printReceipt}
