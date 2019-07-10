@@ -34,5 +34,5 @@ function createReceiptByItem(barcodes,items){
     }
 }
 
-module.exports = findItemByBarcodes;
-module.exports = createReceiptByItem;
+module.exports = {findItemByBarcodes,
+createReceiptByItem}
